@@ -13,13 +13,13 @@ request.setRequestHeader "If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT"
 request.send
 response = StrConv(request.responseBody, vbUnicode)
 html.body.innerHTML = response
-checktime = html.getElementsByClassName("report-info-text").item(0).innerText
+checkdate = html.getElementsByClassName("report-info-text").item(0).innerText
 
 Dim WB1 As Workbook
 Set WB1 = Workbooks.Add
 ActiveWorkbook.SaveAs FileName:=Environ("Userprofile") & "\Downloads\TempFiles\PasteLinksHere.xlsx"
 Set WB = Workbooks.Open(FileName:=Environ("Userprofile") & "\Downloads\TempFiles\PasteLinksHere.xlsx", local:=True)
-WB.Sheets("Sheet1").Range("A1").Value = checktime
+WB.Sheets("Sheet1").Range("A1").Value = checkdate
 WB.Sheets("Sheet1").Range("A2").Formula = "=RIGHT(LEFT(RIGHT(A1,LEN(A1)-15),LEN(RIGHT(A1,LEN(A1)-15))-1),LEN(LEFT(RIGHT(A1,LEN(A1)-15),LEN(RIGHT(A1,LEN(A1)-15))-1))-1)"
 WB.Sheets("Sheet1").Range("A2").Copy
 WB.Sheets("Sheet1").Range("A2").PasteSpecial xlPasteValues
